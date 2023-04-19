@@ -54,6 +54,12 @@ jobmanager.rpc.address: %s''' % (FLINK_JOB_MANAGER_HEAP_SIZE, FLINK_JOB_MANAGER_
         env_vars={
             "FLINK_PROPERTIES": JOB_MANAGER_PROPERTIES,
         },
+        public_ports={
+            "web-ui": PortSpec(number=FLINK_WEB_UI_SERVER_PORT_NUMBER),
+            "grpc-server": PortSpec(number=FLINK_GRPC_SERVER_PORT_NUMBER),
+            "blob-server": PortSpec(number=FLINK_BLOB_SERVER_PORT_NUMBER),
+            "query-server": PortSpec(number=FLINK_QUERY_SERVER_PORT_NUMBER),
+        },
         files=flink_lib_jars_extra,
     )
     job_manager_service = plan.add_service(name=FLINK_JOB_MANAGER_HOSTNAME, config=job_manager_config)
